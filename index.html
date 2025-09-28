@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baccarat Probability Lab (8-Deck)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Baccarat Probability Lab <span class="muted">(8 Decks = 416 cards)</span></h1>
+    <p class="subtitle">คำนวณความน่าจะเป็นแบบ <b>คณิตเป๊ะ</b> สำหรับแต้ม 2 ใบ และจำลอง <b>เกมเต็มตาถัดไป</b> แบบรวดเร็ว</p>
+  </header>
+
+  <main>
+    <section class="card shoe">
+      <h2>ตั้งค่าขอนไพ่ (8 เด็ค)</h2>
+      <div class="controls">
+        <div class="control">
+          <label>ไพ่ที่ถูกใช้ไป (Remove):</label>
+          <div class="ranks-grid" id="rankButtons">
+            <!-- Buttons injected by JS -->
+          </div>
+          <div class="actions-row">
+            <button id="btnUndo" title="ลบใบล่าสุด">Undo</button>
+            <button id="btnReset" class="danger">รีเซ็ตไพ่ทั้งหมด</button>
+            <button id="btnPreset1" class="ghost" title="ลบ J,J,K,K,9">Preset: J,J,K,K,9</button>
+          </div>
+          <div class="removed-list">
+            <span>รายการที่ลบ:</span>
+            <div id="removedList"></div>
+          </div>
+        </div>
+        <div class="control compact">
+          <label>จำนวนที่เหลือ (ต่อหน้าไพ่):</label>
+          <div id="countsTable"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>คำนวณแบบคณิต (Exact) — แต้ม 2 ใบ (0–9)</h2>
+      <p class="help">ผลนี้คือความน่าจะเป็นของ <b>มือ 2 ใบเดียว</b> ว่าจะได้แต้ม 0–9 รวมถึงโอกาสได้ <b>Natural (8/9)</b>. ใช้สูตรนับจำนวนวิธี (combinatorics).</p>
+      <div class="actions-row">
+        <button id="btnComputeExact" class="primary">คำนวณ Exact</button>
+      </div>
+      <div id="exactResults" class="tables-wrap"></div>
+    </section>
+
+    <section class="card">
+      <h2>จำลอง “เกมเต็ม” ตาถัดไป (Monte Carlo)</h2>
+      <p class="help">จำลองการแจกไพ่เต็มกติกา (จั่วใบที่ 3 ตามตาราง) เพื่อประมาณค่า: Natural %, Player/Banker Draw %, และโอกาสชนะของ Banker/Player/Tie</p>
+      <div class="controls">
+        <div class="control">
+          <label for="simN">จำนวนรอบจำลอง</label>
+          <input id="simN" type="number" min="1000" max="2000000" step="1000" value="200000" />
+        </div>
+        <div class="actions-row">
+          <button id="btnSim" class="primary">เริ่มจำลอง</button>
+          <span id="simStatus" class="status"></span>
+        </div>
+      </div>
+      <div id="simResults" class="tables-wrap"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Tip: ค่าพื้นฐานของบาคาร่า 8 เด็ค (ไม่มีการลบไพ่) มักอยู่ราว Natural ≈ 34.3%, Banker ≈ 45.8–46.0%, Player ≈ 44.6–44.7%, Tie ≈ 9.5%.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
